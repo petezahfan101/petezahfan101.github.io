@@ -1,228 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Embeddr - Embed Anything!</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy</title>
     <style>
-        body {
-            background: linear-gradient(135deg, #0a0a23 0%, #1e1e4a 100%);
-            color: #e0e0ff;
-            font-family: 'Roboto', sans-serif;
-            height: 100vh;
+        html, body {
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            position: relative;
-        }
-
-        #canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.8;
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
-        }
-
-        #bigTitle {
-            width: 25vw;
-            max-width: 300px;
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
-            margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
-            margin: 0.5em 0;
-            text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff;
-            background: linear-gradient(45deg, #00d4ff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        .p {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-bottom: 2rem;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-        }
-
-        .input-container {
-            margin: 20px 0;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            background: rgba(255, 255, 255, 0.1);
-            color: #e0e0ff;
-            outline: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(0, 212, 255, 0.2);
-            transition: all 0.3s ease;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        input[type="text"]:focus {
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.5), inset 0 0 10px rgba(0, 212, 255, 0.3);
-            transform: scale(1.02);
-        }
-
-        .output {
-            width: 100%;
-            max-width: 500px;
-            padding: 15px;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            color: #e0e0ff;
-            font-size: 1.1rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-
-        .output:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
-        }
-
-        #underText {
-            font-size: 0.9rem;
-            margin-top: 10px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-        }
-
-        .small {
-            font-size: 0.85rem;
-            position: absolute;
-            bottom: 20px;
-            opacity: 0.7;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-        }
-
-        a {
-            color: #00d4ff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        a:hover {
-            color: #ff00ff;
-            text-shadow: 0 0 10px #ff00ff;
-        }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff;
-            }
-            to {
-                text-shadow: 0 0 20px #ff00ff, 0 0 30px #ff00ff;
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* Nebula effect */
-        .nebula {
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
-            z-index: -1;
-            opacity: 0.5;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
-
 <body>
-    <div class="nebula"></div>
-    <canvas id="canvas"></canvas>
-    <div class="container">
-        <img src="logo.png" alt="Logo" id="bigTitle">
-        <h1>Embed Anything!</h1>
-        <p class="p">iFrame Embed ANY Site!</p>
-        <div class="input-container">
-            <input type="text" id="urlInput" placeholder="Enter any URL..." autocomplete="off" spellcheck="false">
-        </div>
-        <div class="output" id="outputLink">-</div>
-        <p id="underText" class="p">a</p>
-        <p class="small">By <a href="https://rhw.one">RHW</a> - Runs on <a href="https://github.com/tf7software/UV-Static">UV-Static</a> - Originally by <a href="https://technonyte.pages.dev/">technonyte0</a></p>
-    </div>
-
-    <script>
-    const urlInput = document.getElementById('urlInput');
-    const outputLink = document.getElementById('outputLink');
-    const underText = document.getElementById('underText');
-
-    urlInput.addEventListener('input', function () {
-        const url = urlInput.value.trim();
-        if (url) {
-            const formattedUrl = url.startsWith('https://') ? url : 'https://' + url;
-            outputLink.textContent = `https://embeddr.rhw.one/embed#${formattedUrl}`;
-            underText.innerHTML = '<strong>Click</strong> the text above to copy it!';
-            underText.style.opacity = '1';
-        } else {
-            outputLink.textContent = '';
-            underText.innerHTML = 'a';
-            underText.style.opacity = '0';
-        }
-    });
-
-    outputLink.addEventListener('click', function () {
-        const tempTextarea = document.createElement('textarea');
-        tempTextarea.value = outputLink.textContent;
-        document.body.appendChild(tempTextarea);
-        tempTextarea.select();
-        tempTextarea.setSelectionRange(0, 99999);
-        document.execCommand('copy');
-        document.body.removeChild(tempTextarea);
-        underText.innerHTML = '<strong>Copied to clipboard!</strong>';
-    });
-    </script>
-    <script src="stars.js"></script>
+    <iframe src="proxy.html" frameborder="0"></iframe>
 </body>
-
 </html>

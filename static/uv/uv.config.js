@@ -1,5 +1,5 @@
 self.__uv$config = {
-    prefix: '/static/petezah/',
+    prefix: '/static/urtdatabase/',
     bare: 'https://science.petezahgames.com/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,

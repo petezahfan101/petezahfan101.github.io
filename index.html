@@ -8,53 +8,157 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
   <style>
     body {
-      background: radial-gradient(circle at top left, #111, #000);
-      color: white;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at top left, #0a0a1a, #000);
+      color: #d1d5db;
+      font-family: 'Orbitron', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       overflow-x: hidden;
+      background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+      animation: starry-sky 120s linear infinite;
     }
+
+    @keyframes starry-sky {
+      from { background-position: 0 0; }
+      to { background-position: 10000px 10000px; }
+    }
+
     .sidebar {
       position: fixed;
       top: 0;
       left: 0;
-      width: 80px;
+      width: 100px;
       height: 100vh;
-      background: #1a1a1a;
+      background: linear-gradient(180deg, #0a0a1a, #050510);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 1rem;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      padding-top: 2rem;
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.6), inset 0 0 10px rgba(0, 0, 0, 0.8);
       z-index: 1000;
+      border-right: 1px solid rgba(59, 130, 246, 0.2);
     }
+
     .sidebar a {
-      color: white;
-      font-size: 1.5rem;
-      margin: 1.2rem 0;
-      transition: transform 0.2s ease;
+      color: #93c5fd;
+      font-size: 2rem;
+      margin: 1.8rem 0;
+      transition: transform 0.3s ease, color 0.3s ease;
       position: relative;
-      z-index: 2;
+      filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
     }
+
+    .sidebar a:hover {
+      color: #3b82f6;
+      transform: scale(1.3);
+      text-shadow: 0 0 15px #3b82f6, 0 0 25px #3b82f6;
+    }
+
+    .sidebar a::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 110%;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #0a0a1a;
+      color: #93c5fd;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .sidebar a:hover::after {
+      opacity: 1;
+    }
+
     .topbar {
-      margin-left: 80px;
-      background: #0d0d0d;
-      padding: 1rem;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+      margin-left: 100px;
+      background: linear-gradient(90deg, #0a0a1a, #050510);
+      padding: 1.8rem;
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.7);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.2);
     }
+
     .glow {
-      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff;
+      text-shadow: 0 0 12px #3b82f6, 0 0 24px #2563eb, 0 0 36px #1e40af;
+      color: #bfdbfe;
+      letter-spacing: 1.5px;
     }
+
     .main-content {
-      margin-left: 80px;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+      margin-left: 100px;
+      padding: 3.5rem;
+      background: rgba(10, 10, 26, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 0 50px rgba(59, 130, 246, 0.4), inset 0 0 15px rgba(0, 0, 0, 0.9);
+      margin-top: 2.5rem;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .main-content p {
+      color: #93c5fd;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      text-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+    }
+
+    .form-control {
+      background: rgba(10, 10, 26, 0.9);
+      border: 1px solid #3b82f6;
+      color: #bfdbfe;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+      transition: all 0.3s ease;
+      border-radius: 10px;
+    }
+
+    .form-control:focus {
+      background: rgba(10, 10, 26, 1);
+      border-color: #60a5fa;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+      color: #bfdbfe;
+    }
+
+    .form-control::placeholder {
+      color: #60a5fa;
+      opacity: 0.8;
+    }
+
+    h2, h3 {
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    @font-face {
+      font-family: 'Orbitron';
+      src: url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+    }
+
+    /* Nebula-like particle effect */
+    .nebula {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+      animation: nebula-glow 15s ease-in-out infinite;
+    }
+
+    @keyframes nebula-glow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
     }
   </style>
 </head>
 <body>
+  <div class="nebula"></div>
   <div class="sidebar">
     <a href="#" data-label="Movies"><i class="bi bi-film"></i></a>
     <a href="#" data-label="Apps"><i class="bi bi-phone"></i></a>
@@ -64,12 +168,12 @@
 
   <div class="topbar d-flex justify-content-between align-items-center">
     <h2 class="glow m-0">URTDatabase</h2>
-    <input type="text" class="form-control w-25" placeholder="Search..." id="searchInput" />
+    <input type="text" class="form-control w-25" placeholder="Search the Cosmos..." id="searchInput" />
   </div>
 
   <div class="main-content mt-4">
     <h3 class="glow">Welcome to URTDatabase</h3>
-    <p>Browse through a sleek database of movies and apps, designed to be as cool as it is useful. Use the navigation to explore!</p>
+    <p>Venture into a stellar database of movies and apps, engineered with cosmic elegance. Use the sidebar to navigate the vast expanse of content!</p>
   </div>
 
   <script>

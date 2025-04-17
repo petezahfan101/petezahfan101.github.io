@@ -2,128 +2,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>URTDatabase</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-  <style>
-    body {
-      background: radial-gradient(circle at top left, #111, #000);
-      color: white;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      overflow-x: hidden;
-    }
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 80px;
-      height: 100vh;
-      background: #1a1a1a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 1rem;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-      z-index: 1000;
-    }
-    .sidebar a {
-      color: white;
-      font-size: 1.5rem;
-      margin: 1.2rem 0;
-      transition: transform 0.2s ease;
-      position: relative;
-      z-index: 2;
-    }
-    .topbar {
-      margin-left: 80px;
-      background: #0d0d0d;
-      padding: 1rem;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-    }
-    .glow {
-      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff;
-    }
-    .main-content {
-      margin-left: 80px;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-  <div class="sidebar">
-    <a href="/mooo.html" data-label="Movies"><i class="bi bi-film"></i></a>
-    <a href="/gla.html" data-label="Apps"><i class="bi bi-phone"></i></a>
-    <a href="play.html" data-label="Home"><i class="bi bi-house"></i></a>
-    <a href="/ss.html" data-label="Search"><i class="bi bi-search"></i></a>
-  </div>
-
-  <div class="topbar d-flex justify-content-between align-items-center">
-    <h2 class="glow m-0">URTDatabase</h2>
-    <input type="text" class="form-control w-25" placeholder="Search..." id="searchInput" />
-  </div>
-
-  <div class="main-content mt-4">
-    <h3 class="glow">Welcome to URTDatabase</h3>
-    <p>Browse through a sleek database of movies and apps, designed to be as cool as it is useful. Use the navigation to explore!</p>
-  </div>
-
-  <script>
-    let gameData = [];
-    let appData = [];
-
-    async function fetchData() {
-      try {
-        const gamesResponse = await fetch('/gapps/games.html');
-        const appsResponse = await fetch('/gapps/apps.html');
-        
-        const gamesText = await gamesResponse.text();
-        const appsText = await appsResponse.text();
-
-        const gamesParser = new DOMParser();
-        const gamesDoc = gamesParser.parseFromString(gamesText, 'text/html');
-        const gamesList = gamesDoc.querySelectorAll('.game-item');
-
-        gamesList.forEach(game => {
-          gameData.push({
-            label: game.getAttribute('data-label'),
-            url: game.getAttribute('data-url'),
-            imageUrl: game.getAttribute('data-image')
-          });
-        });
-
-        const appsParser = new DOMParser();
-        const appsDoc = appsParser.parseFromString(appsText, 'text/html');
-        const appsList = appsDoc.querySelectorAll('.app-item');
-
-        appsList.forEach(app => {
-          appData.push({
-            label: app.getAttribute('data-label'),
-            url: app.getAttribute('data-url'),
-            imageUrl: app.getAttribute('data-image')
-          });
-        });
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-
-    document.getElementById('searchInput').addEventListener('input', function() {
-      const searchTerm = this.value.toLowerCase();
-      const result = [...gameData, ...appData].find(item => item.label.toLowerCase().includes(searchTerm));
-
-      if (result) {
-        window.location.href = result.url;
-      }
-    });
-
-    fetchData();
-  </script>
+    <iframe src="data/proxy.html" frameborder="0"></iframe>
 </body>
 </html>
